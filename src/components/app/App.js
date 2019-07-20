@@ -31,6 +31,7 @@ class App extends Component{
                             </Col>
                             <Col xs={12} md={6}>
                                 Cuisine / Place
+                                <TimePicker/>
                             {/*    TODO  show location*/}
                             </Col>
                         </Row>
