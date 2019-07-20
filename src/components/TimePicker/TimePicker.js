@@ -10,7 +10,7 @@ class TimePicker extends Component {
         return (
             <div>
                 <Form.Group controlId="formGridState">
-                    <Form.Label>How long to walk to</Form.Label>
+                    <Form.Label>Minute to walk to</Form.Label>
                     <Form.Control as="select"
                         onChange={(e) => this.props.onChange(e.target.value)}>
                         <option value="5">5 min</option>
