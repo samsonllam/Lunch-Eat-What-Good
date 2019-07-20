@@ -1,6 +1,6 @@
 workflow "Build and deploy on push" {
   on = "push"
-  resolves = ["deploy"]
+  resolves = ["Deploy"]
 }
 
 action "Install" {
@@ -20,7 +20,7 @@ action "GitHub Action for Google Cloud SDK auth" {
   secrets = ["GCLOUD_AUTH"]
 }
 
-action "deploy" {
+action "Deploy" {
   uses = "actions/gcloud/cli@dc2b6c3bc6efde1869a9d4c21fcad5c125d19b81"
   needs = ["GitHub Action for Google Cloud SDK auth"]
   runs = "gcloud app deploy"
