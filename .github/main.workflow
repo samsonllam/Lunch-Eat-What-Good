@@ -1,5 +1,5 @@
 workflow "Build and deploy on push" {
-  resolves = ["GitHub Action for Google Cloud"]
+  resolves = ["gcloud deploy"]
   on = "push"
 }
 
