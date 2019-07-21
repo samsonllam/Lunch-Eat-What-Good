@@ -1,27 +1,33 @@
 workflow "Build and deploy on push" {
+  resolves = ["GitHub Action for Google Cloud"]
   on = "push"
-  resolves = ["Deploy"]
 }
 
-action "Install" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  runs = "npm install"
+action "Filter Master" {
+  uses = "actions/bin/filter@master"
+  args = "branch master"
 }
 
-action "Build" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  needs = ["Install"]
-  runs = "npm run build"
+action "Install node_modules" {
+  uses = "nuxt/actions-yarn@master"
+  needs = ["Filter Master"]
+  args = "install"
+}
+
+action "Build Static Assets" {
+  uses = "nuxt/actions-yarn@master"
+  needs = ["Install node_modules"]
+  args = "build"
 }
 
 action "GitHub Action for Google Cloud SDK auth" {
-  uses = "actions/gcloud/auth@dc2b6c3bc6efde1869a9d4c21fcad5c125d19b81"
-  needs = ["Build"]
+  uses = "actions/gcloud/auth@master"
+  needs = ["Build Static Assets"]
   secrets = ["GCLOUD_AUTH"]
 }
 
-action "Deploy" {
-  uses = "actions/gcloud/cli@dc2b6c3bc6efde1869a9d4c21fcad5c125d19b81"
+action "GitHub Action for Google Cloud" {
+  uses = "actions/gcloud/cli@master"
   needs = ["GitHub Action for Google Cloud SDK auth"]
-  runs = "gcloud app deploy"
+  runs = "gcloud app deploy — project=lunch-eat-where-good"
 }
