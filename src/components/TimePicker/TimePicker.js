@@ -8,17 +8,15 @@ class TimePicker extends Component {
 
     render() {
         return (
-            <div>
-                <Form.Group controlId="formGridState">
-                    <Form.Label>Minute to Walk</Form.Label>
-                    <Form.Control as="select"
-                        onChange={(e) => this.props.onChange(e.target.value)}>
-                        <option value="5">5 min</option>
-                        <option value="10">10 min</option>
-                        <option value="15">15 min</option>
-                    </Form.Control>
-                </Form.Group>
-            </div>
+            <Form.Group controlId="formGridState">
+                <Form.Label>Minute to Walk</Form.Label>
+                <Form.Control as="select"
+                              onChange={(e) => this.props.onChange(e.target.value)}>
+                    <option value="5">5 min</option>
+                    <option value="10">10 min</option>
+                    <option value="15">15 min</option>
+                </Form.Control>
+            </Form.Group>
         );
     }
 }
