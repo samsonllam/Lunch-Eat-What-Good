@@ -11,6 +11,8 @@ import PathUtil from "../../Util/PathUtil"
 class App extends Component{
     state = {
         walkTime: 5,
+        radius: 416,
+        location: "22.348240,114.200554",
     }
 
     constructor(props){
@@ -24,7 +26,11 @@ class App extends Component{
     }
 
     searchRestaurant(){
-        fetch(PathUtil.getApiURL + "json?location=-22.348240,114.200554&radius=416&types=Restaurants&key=AIzaSyCGOqU7PTHrO238H01OrYew-MVp4DkbH80")
+        fetch(PathUtil.getApiURL +
+                "json?location=" + this.state.location +
+                "&radius=" + this.state.radius +
+                "&types=Restaurants" +
+                "&key=" + PathUtil.getApiKey)
             .then(res => res.json())
             .then(
                 (result) => {
