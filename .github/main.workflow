@@ -3,31 +3,31 @@ workflow "Build and deploy on push" {
   on = "push"
 }
 
-action "Filter Master" {
+action "filter master" {
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
 
-action "Install node_modules" {
+action "install node_modules" {
   uses = "nuxt/actions-yarn@master"
   needs = ["Filter Master"]
   args = "install"
 }
 
-action "Build Static Assets" {
+action "build" {
   uses = "nuxt/actions-yarn@master"
   needs = ["Install node_modules"]
   args = "build"
 }
 
-action "GitHub Action for Google Cloud SDK auth" {
+action "gcloud auth" {
   uses = "actions/gcloud/auth@master"
-  needs = ["Build Static Assets"]
+  needs = ["build static files"]
   secrets = ["GCLOUD_AUTH"]
 }
 
-action "GitHub Action for Google Cloud" {
+action "gcloud deploy" {
   uses = "actions/gcloud/cli@master"
-  needs = ["GitHub Action for Google Cloud SDK auth"]
-  runs = "gcloud app deploy — project=lunch-eat-where-good"
+  needs = ["gcloud auth"]
+  runs = "gcloud app deploy — project=lunch-eat-what-good"
 }
