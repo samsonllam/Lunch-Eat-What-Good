@@ -10,13 +10,13 @@ action "filter master" {
 
 action "install node_modules" {
   uses = "nuxt/actions-yarn@master"
-  needs = ["Filter Master"]
+  needs = ["filter master"]
   args = "install"
 }
 
-action "build" {
+action "build static files" {
   uses = "nuxt/actions-yarn@master"
-  needs = ["Install node_modules"]
+  needs = ["install node_modules"]
   args = "build"
 }
 
