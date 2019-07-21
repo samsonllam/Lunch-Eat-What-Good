@@ -24,11 +24,10 @@ action "gcloud auth" {
   uses = "actions/gcloud/auth@master"
   secrets = ["GCLOUD_AUTH"]
   needs = ["build static files"]
-  
 }
 
 action "gcloud deploy" {
   uses = "actions/gcloud/cli@master"
   needs = ["gcloud auth"]
-  runs = "gcloud app deploy — project=lunch-eat-what-good"
+  runs = "gcloud app deploy --project=lunch-eat-what-good"
 }
