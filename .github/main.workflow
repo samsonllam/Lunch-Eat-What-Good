@@ -1,4 +1,4 @@
-workflow "Build and deploy on push" {
+workflow "build & deploy" {
   resolves = ["gcloud deploy"]
   on = "push"
 }
@@ -22,8 +22,9 @@ action "build static files" {
 
 action "gcloud auth" {
   uses = "actions/gcloud/auth@master"
-  needs = ["build static files"]
   secrets = ["GCLOUD_AUTH"]
+  needs = ["build static files"]
+  
 }
 
 action "gcloud deploy" {
