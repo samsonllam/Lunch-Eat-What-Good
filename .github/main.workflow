@@ -22,8 +22,8 @@ action "build static files" {
 
 action "gcloud auth" {
   uses = "actions/gcloud/auth@master"
-  secrets = ["GCLOUD_AUTH"]
   needs = ["build static files"]
+  secrets = ["GCLOUD_AUTH"]
 }
 
 action "gcloud deploy" {
